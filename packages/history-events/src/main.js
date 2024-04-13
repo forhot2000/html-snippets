@@ -1,53 +1,42 @@
+import createRouter from './create-router';
 import './style.css';
 
-const currentUrl = document.getElementById('currentUrl');
+const currentUrlLabel = document.getElementById('currentUrl');
 
 const router = createRouter({
   onChange(href, state) {
     console.log(href, state);
-    currentUrl.innerText = href;
+    currentUrlLabel.innerText = href;
+
+    const currentHref = window.location.href;
+    document.querySelectorAll('.nav a').forEach((link) => {
+      const targetHref = link.href;
+      if (currentHref === targetHref) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
   },
 });
 
-document.querySelectorAll('a').forEach((link) =>
+document.querySelectorAll('.nav a').forEach((link) =>
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    router.pushState(e.target.href, {
-      rnd: Math.random(),
-    });
+    const currentHref = window.location.href;
+    const targetHref = e.target.href;
+    if (currentHref !== targetHref) {
+      router.pushState(targetHref, {
+        rnd: Math.random(),
+      });
+    }
   })
 );
 
 document.addEventListener('scroll', (e) => {
-  const unused = '';
   const scrollTop = document.scrollingElement.scrollTop;
-  history.replaceState(
-    {
-      ...history.state,
-      scrollTop,
-    },
-    unused
-  );
-});
-
-function createRouter({ onChange }) {
-  const unused = '';
-
-  let currentHref = window.location.href;
-  onChange(currentHref, history.state);
-
-  window.addEventListener('popstate', (e) => {
-    const href = window.location.href;
-    const state = e.state;
-    if (href !== currentHref) {
-      onChange(href, state);
-    }
+  router.replaceState({
+    ...history.state,
+    scrollTop,
   });
-
-  function pushState(href, state) {
-    history.pushState(state, unused, href);
-    onChange(href, state);
-  }
-
-  return { pushState };
-}
+});

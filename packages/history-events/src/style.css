@@ -8,6 +8,11 @@
   text-transform: uppercase;
 }
 
+a.active {
+  text-decoration: none;
+  cursor: default;
+}
+
 .large {
   height: 50vh;
   margin-top: 20px;
