@@ -3,8 +3,13 @@ const unused = '';
 history.scrollRestoration = 'manual';
 
 function onScroll() {
+  // 每次滚动时记录最新的位置
   const scrollTop = document.scrollingElement.scrollTop;
-  history.replaceState({ scrollTop }, unused);
+  const state = {
+    ...history.state,
+    scrollTop,
+  };
+  history.replaceState(state, unused);
 }
 
 function onLoad() {
@@ -17,12 +22,13 @@ function onLoad() {
       top: scrollTop,
     });
   }
-  // 每次滚动时记录最新的位置
+
+  // 监听页面滚动
   document.addEventListener('scroll', onScroll);
 }
 
-async function historyRestoration({ loader }) {
-  await loader();
+async function historyRestoration({ load }) {
+  await load();
   onLoad();
 }
 

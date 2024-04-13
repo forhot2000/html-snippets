@@ -5,7 +5,7 @@ const html = document.getElementById('html-content').textContent;
 const root = document.getElementById('app');
 
 historyRestoration({
-  async loader() {
+  async load() {
     // 模拟延时加载页面
     console.log('load...');
     await delay(300);
