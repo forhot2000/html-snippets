@@ -29,13 +29,14 @@ function onLoad() {
   }
 
   // 每次滚动时记录最新的位置
-  document.addEventListener('scroll', (e) => {
+  document.addEventListener('scroll', () => {
     const scrollTop = document.scrollingElement.scrollTop;
     history.replaceState({ scrollTop }, window.location.href);
   });
 }
 
 async function main() {
+  history.scrollRestoration = 'manual';
   await load();
   onLoad();
 }
