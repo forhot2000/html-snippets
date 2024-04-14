@@ -3,20 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>history state demo</title>
+    <title>home - history state demo</title>
   </head>
   <body>
     <h2>Home page</h2>
     <div id="app"></div>
 
-    <script type="module" src="./src/home.js"></script>
+    <script type="module" src="./src/pages/home.js"></script>
 
-    <script id="html-content" type="template">
+    <script id="html-content" type="text/template">
       <div class="large"></div>
       <div class="large"></div>
       <div class="large"></div>
-      <div>
-          <a id="gotoAbout" href="./about">About</a>
+      <div class="nav">
+        <a href="/">Home</a>
+        <a href="/react">React</a>
+        <a href="/vue">Vue</a>
+        <a href="/about">About</a>
       </div>
       <div class="large"></div>
       <div class="large"></div>

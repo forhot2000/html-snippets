@@ -17,6 +17,7 @@ function onLoad() {
 
   // 加载页面后滚动页面到记录的位置
   const scrollTop = history.state?.scrollTop;
+  console.log('restore scroll position: ' + scrollTop);
   if (scrollTop) {
     document.scrollingElement.scrollTo({
       top: scrollTop,
@@ -27,9 +28,7 @@ function onLoad() {
   document.addEventListener('scroll', onScroll);
 }
 
-async function historyRestoration({ load }) {
+export async function historyRestoration({ load }) {
   await load();
   onLoad();
 }
-
-export default historyRestoration;
