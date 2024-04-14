@@ -1,4 +1,4 @@
-import { createHistoryRestoration } from '../historyRestoration';
+import { createHistoryRestoration } from '../lib/historyRestoration';
 import './style.css';
 
 const html = document.getElementById('html-content')!.textContent!;

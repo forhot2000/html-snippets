@@ -1,7 +1,7 @@
 <script setup>
 import { defineAsyncComponent, h, onMounted } from 'vue';
-import { createHistoryRestoration } from '../lib/historyRestorationtion';
-import { service } from '../lib/servicevice';
+import { createHistoryRestoration } from '../lib/historyRestoration';
+import { service } from '../lib/service';
 import LinkList from './LinkList.vue';
 
 const historyRestoration = createHistoryRestoration();
