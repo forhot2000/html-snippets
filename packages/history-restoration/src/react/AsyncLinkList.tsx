@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
-import { service } from '../../service';
-import { useHistoryRestoration } from '../../useHistoryRestoration';
-import LinkList from './LinkList.jsx';
-import Loading from './Loading.jsx';
+import { service } from '../lib/service';
+import { useHistoryRestoration } from '../lib/useHistoryRestoration';
+import LinkList from './LinkList';
+import Loading from './Loading';
 
 const AsyncLinkListHOC = React.lazy(async () => {
   const links = await service.getLinks();

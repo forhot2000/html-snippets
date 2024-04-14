@@ -1,7 +1,8 @@
 import React from 'react';
-import LinkListItem from './LinkListItem.jsx';
+import { Link } from '../lib/service';
+import LinkListItem from './LinkListItem';
 
-export default function LinkList({ links }) {
+export default function LinkList({ links }: { links: Link[] }) {
   return (
     <ul>
       {links.map((link) => (

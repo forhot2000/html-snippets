@@ -1,8 +1,8 @@
 import { createHistoryRestoration } from '../historyRestoration';
 import './style.css';
 
-const html = document.getElementById('html-content').textContent;
-const root = document.getElementById('app');
+const html = document.getElementById('html-content')!.textContent!;
+const root = document.getElementById('app')!;
 
 const historyRestoration = createHistoryRestoration();
 

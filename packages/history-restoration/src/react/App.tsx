@@ -1,7 +1,7 @@
 import React, { StrictMode } from 'react';
-import AsyncLinkList from './AsyncLinkList.jsx';
-import LargeBlock from './LargeBlock.jsx';
-import PoweredByReact from './PoweredByReact.jsx';
+import AsyncLinkList from './AsyncLinkList';
+import LargeBlock from './LargeBlock';
+import PoweredByReact from './PoweredByReact';
 
 export default function App() {
   return (

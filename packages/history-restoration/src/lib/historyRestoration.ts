@@ -5,7 +5,7 @@ history.scrollRestoration = 'manual';
 export function createHistoryRestoration() {
   function onScroll() {
     // 每次滚动时记录最新的位置
-    const scrollTop = document.scrollingElement.scrollTop;
+    const scrollTop = document.scrollingElement!.scrollTop;
     const state = {
       ...history.state,
       scrollTop,
@@ -20,7 +20,7 @@ export function createHistoryRestoration() {
     const scrollTop = history.state?.scrollTop;
     console.log('restore scroll position: ' + scrollTop);
     if (scrollTop) {
-      document.scrollingElement.scrollTo({
+      document.scrollingElement!.scrollTo({
         top: scrollTop,
       });
     }
