@@ -1,22 +1,20 @@
-import { createApp, h } from 'vue';
-import { historyRestoration } from '../historyRestoration';
+import { createApp, defineAsyncComponent, h, onMounted } from 'vue';
+import { createHistoryRestoration } from '../historyRestoration';
 import { service } from '../service';
 import './style.css';
 
+const historyRestoration = createHistoryRestoration();
+
 // component
 const App = {
-  props: {
-    links: Array(),
-  },
-  setup(props) {
-    const links = props.links;
+  setup() {
     return () =>
       h('div', [
         // children
         h(LargeBlock),
         h(LargeBlock),
         h(LargeBlock),
-        h(LinkList, { links }),
+        h(AsyncLinkList),
         h(PoweredByVue),
         h(LargeBlock),
         h(LargeBlock),
@@ -25,9 +23,23 @@ const App = {
 };
 
 // component
+const AsyncLinkList = defineAsyncComponent(async () => {
+  const links = await service.getLinks();
+  return {
+    setup() {
+      onMounted(() => {
+        // scroll to saved scroll position after link list rendered
+        historyRestoration.onLoad();
+      });
+      return () => h(LinkList, { links });
+    },
+  };
+});
+
+// component
 const LinkList = {
   props: {
-    links: Array(),
+    links: Array,
   },
   setup(props) {
     const links = props.links;
@@ -65,12 +77,5 @@ const LargeBlock = {
   },
 };
 
-async function load() {
-  const links = await service.getLinks();
-  const app = createApp(App, { links });
-  app.mount('#app');
-}
-
-historyRestoration({
-  load,
-});
+const app = createApp(App);
+app.mount('#app');

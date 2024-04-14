@@ -5,25 +5,6 @@ import { useHistoryRestoration } from '../useHistoryRestoration';
 import './style.css';
 
 function App() {
-  const [links, setLinks] = React.useState([]);
-  const [pending, setPending] = React.useState(true);
-  const { done } = useHistoryRestoration();
-
-  React.useEffect(() => {
-    async function load() {
-      const links = await service.getLinks();
-      setLinks(links);
-    }
-    load().finally(() => {
-      setPending(false);
-      done();
-    });
-  }, []);
-
-  if (pending) {
-    return React.createElement(Loading);
-  }
-
   return React.createElement(
     'div',
     {},
@@ -31,7 +12,7 @@ function App() {
     React.createElement(LargeBlock),
     React.createElement(LargeBlock),
     React.createElement(LargeBlock),
-    React.createElement(LinkList, { links }),
+    React.createElement(AsyncLinkList),
     React.createElement(PoweredByReact),
     React.createElement(LargeBlock),
     React.createElement(LargeBlock)
@@ -62,6 +43,57 @@ function LargeBlock() {
   return React.createElement('div', { className: 'large' });
 }
 
+const LazyLinkListHOC = React.lazy(async () => {
+  const links = await service.getLinks();
+  function LazyLinkList() {
+    const historyRestoration = useHistoryRestoration();
+    React.useEffect(() => {
+      // scroll to saved scroll position after link list rendered
+      historyRestoration.done();
+    }, []);
+    return React.createElement(LinkList, { links });
+  }
+  return { default: LazyLinkList };
+});
+
+function AsyncLinkList() {
+  return React.createElement(
+    React.Suspense,
+    { fallback: React.createElement(Loading) },
+    // children
+    React.createElement(LazyLinkListHOC)
+  );
+}
+
+// same as LinkListWithSuspense
+function LinkListWithLoadEffect() {
+  const [links, setLinks] = React.useState([]);
+  const [pending, setPending] = React.useState(true);
+  const historyRestoration = useHistoryRestoration();
+
+  React.useEffect(() => {
+    async function load() {
+      const links = await service.getLinks();
+      setLinks(links);
+    }
+    load().finally(() => {
+      setPending(false);
+      historyRestoration.done();
+    });
+  }, []);
+
+  if (pending) {
+    return React.createElement(Loading);
+  }
+
+  return React.createElement(LinkList, { links });
+}
+
 const root = ReactDOM.createRoot(document.getElementById('app'));
-const app = React.createElement(App);
+const app = React.createElement(
+  React.StrictMode,
+  {},
+  // children
+  React.createElement(App)
+);
 root.render(app);
