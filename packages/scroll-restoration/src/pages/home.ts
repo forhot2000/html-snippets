@@ -1,5 +1,4 @@
 import { createScrollRestoration } from '../lib/scrollRestoration';
-import './style.css';
 
 const html = document.getElementById('html-content')!.textContent!;
 const root = document.getElementById('app')!;
