@@ -1,7 +1,10 @@
-<script setup>
+<script setup lang="ts">
+import { Link } from '../lib/service';
 import LinkListItem from './LinkListItem.vue';
 
-defineProps(['links']);
+defineProps<{
+  links: Link[];
+}>();
 </script>
 
 <template>

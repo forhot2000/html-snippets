@@ -1,5 +1,9 @@
-<script setup>
-defineProps(['link']);
+<script setup lang="ts">
+import { Link } from '../lib/service';
+
+defineProps<{
+  link: Link;
+}>();
 </script>
 
 <template>

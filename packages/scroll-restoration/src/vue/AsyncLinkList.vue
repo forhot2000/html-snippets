@@ -1,14 +1,14 @@
-<script setup>
-import { defineAsyncComponent, h, onMounted } from 'vue';
+<script setup lang="ts">
+import { Component, defineAsyncComponent, h, onMounted } from 'vue';
 import { createHistoryRestoration } from '../lib/historyRestoration';
 import { service } from '../lib/service';
 import LinkList from './LinkList.vue';
 
 const historyRestoration = createHistoryRestoration();
 
-const AsyncLinkList = defineAsyncComponent(async () => {
+const AsyncLinkListHOC = defineAsyncComponent(async () => {
   const links = await service.getLinks();
-  return {
+  const AsyncLinkList: Component = {
     setup() {
       onMounted(() => {
         // scroll to saved scroll position after link list rendered
@@ -17,9 +17,10 @@ const AsyncLinkList = defineAsyncComponent(async () => {
       return () => h(LinkList, { links });
     },
   };
+  return AsyncLinkList;
 });
 </script>
 
 <template>
-  <AsyncLinkList />
+  <AsyncLinkListHOC />
 </template>
