@@ -34,7 +34,7 @@ export function createScrollRestoration() {
     document.removeEventListener('scroll', onScroll);
   }
 
-  async function load(loader) {
+  async function load(loader: () => Promise<void>) {
     await loader();
     onLoad();
   }
