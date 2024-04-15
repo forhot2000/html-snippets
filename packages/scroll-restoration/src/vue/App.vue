@@ -6,6 +6,8 @@ import AsyncLinkList from './AsyncLinkList.vue';
 
 <template>
   <div>
+    <AsyncLinkList />
+    <PoweredByVue />
     <LargeBlock />
     <LargeBlock />
     <LargeBlock />
