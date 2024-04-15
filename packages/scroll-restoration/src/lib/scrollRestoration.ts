@@ -3,6 +3,9 @@ const unused = '';
 history.scrollRestoration = 'manual';
 
 export function createScrollRestoration() {
+  let waitQueueLength = 0;
+  console.log('reset scrollRestoration.waitQueueLength: ' + waitQueueLength);
+
   function onScroll() {
     // 每次滚动时记录最新的位置
     const scrollTop = document.scrollingElement!.scrollTop;
@@ -13,18 +16,24 @@ export function createScrollRestoration() {
     history.replaceState(state, unused);
   }
 
-  function onLoad() {
-    console.log('onLoad');
+  function done() {
+    waitQueueLength--;
+    console.log('decrease scrollRestoration.waitQueueLength: ' + waitQueueLength);
+    if (!waitQueueLength) {
+      // 加载页面后滚动页面到记录的位置
+      const scrollTop = history.state?.scrollTop;
+      console.log('restore scroll position: ' + scrollTop);
+      if (scrollTop) {
+        document.scrollingElement!.scrollTo({
+          top: scrollTop,
+        });
+      }
 
-    // 加载页面后滚动页面到记录的位置
-    const scrollTop = history.state?.scrollTop;
-    console.log('restore scroll position: ' + scrollTop);
-    if (scrollTop) {
-      document.scrollingElement!.scrollTo({
-        top: scrollTop,
-      });
+      mount();
     }
+  }
 
+  function mount() {
     // 监听页面滚动
     document.addEventListener('scroll', onScroll);
   }
@@ -35,14 +44,23 @@ export function createScrollRestoration() {
   }
 
   async function load(loader: () => Promise<void>) {
+    waitQueueLength++;
+    console.log('increase scrollRestoration.waitQueueLength: ' + waitQueueLength);
     await loader();
-    onLoad();
+    done();
+  }
+
+  function wait<T>(loader: () => Promise<T>) {
+    waitQueueLength++;
+    console.log('increase scrollRestoration.waitQueueLength: ' + waitQueueLength);
+    return loader();
   }
 
   return {
-    onLoad,
     unmount,
     load,
+    wait,
+    done,
   };
 }
 
