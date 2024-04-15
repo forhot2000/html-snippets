@@ -6,17 +6,20 @@ import PoweredByReact from './PoweredByReact';
 export default function App() {
   return (
     <StrictMode>
-      <AsyncLinkList />
-      <PoweredByReact />
-      <LargeBlock />
-      <LargeBlock />
-      <LargeBlock />
-      <AsyncLinkList />
-      <PoweredByReact />
-      <LargeBlock />
-      <LargeBlock />
-      <AsyncLinkList />
-      <PoweredByReact />
+      <main>
+        <h2>React page</h2>
+        <AsyncLinkList />
+        <LargeBlock />
+        <LargeBlock />
+        <LargeBlock />
+        <AsyncLinkList />
+        <LargeBlock />
+        <LargeBlock />
+        <AsyncLinkList />
+      </main>
+      <footer>
+        <PoweredByReact />
+      </footer>
     </StrictMode>
   );
 }

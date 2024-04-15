@@ -5,17 +5,18 @@ import PoweredByVue from './PoweredByVue.vue';
 </script>
 
 <template>
-  <div>
+  <main>
+    <h2>Vue page</h2>
     <AsyncLinkList />
-    <PoweredByVue />
     <LargeBlock />
-    <LargeBlock />
-    <LargeBlock />
-    <AsyncLinkList />
-    <PoweredByVue />
     <LargeBlock />
     <LargeBlock />
     <AsyncLinkList />
+    <LargeBlock />
+    <LargeBlock />
+    <AsyncLinkList />
+  </main>
+  <footer>
     <PoweredByVue />
-  </div>
+  </footer>
 </template>
