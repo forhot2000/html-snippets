@@ -15,8 +15,6 @@ export default defineConfig({
         manualChunks: {
           'lib/react': ['react', 'react-dom'],
           'lib/vue': ['vue'],
-          // 'lib/history-restoration': ['src/historyRestoration.js'],
-          // 'lib/history-restoration-react': ['src/useHistoryRestoration.js'],
         },
       },
     },

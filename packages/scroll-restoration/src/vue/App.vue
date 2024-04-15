@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import PoweredByVue from './PoweredByVue.vue';
-import LargeBlock from './LargeBlock.vue';
 import AsyncLinkList from './AsyncLinkList.vue';
+import LargeBlock from './LargeBlock.vue';
+import PoweredByVue from './PoweredByVue.vue';
 </script>
 
 <template>
@@ -15,5 +15,7 @@ import AsyncLinkList from './AsyncLinkList.vue';
     <PoweredByVue />
     <LargeBlock />
     <LargeBlock />
+    <AsyncLinkList />
+    <PoweredByVue />
   </div>
 </template>

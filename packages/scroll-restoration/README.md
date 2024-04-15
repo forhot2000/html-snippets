@@ -1,13 +1,13 @@
-# historyRestoration
+# scrollRestoration
 
 解决刷新异步加载页面时无法正确保持 scroll position 的问题。
 
 ## 用法
 
 ```js
-import historyRestoration from 'history-restoration';
+import scrollRestoration from 'scroll-restoration';
 
-historyRestoration({
+scrollRestoration({
   async load() {
     // async load your scripts and data
     // then, render html

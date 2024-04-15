@@ -2,7 +2,7 @@ const unused = '';
 
 history.scrollRestoration = 'manual';
 
-export function createHistoryRestoration() {
+export function createScrollRestoration() {
   function onScroll() {
     // 每次滚动时记录最新的位置
     const scrollTop = document.scrollingElement!.scrollTop;
@@ -45,3 +45,5 @@ export function createHistoryRestoration() {
     load,
   };
 }
+
+export type ScrollRestoration = ReturnType<typeof createScrollRestoration>;

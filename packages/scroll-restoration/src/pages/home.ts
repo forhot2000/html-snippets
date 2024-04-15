@@ -1,12 +1,12 @@
-import { createHistoryRestoration } from '../lib/historyRestoration';
+import { createScrollRestoration } from '../lib/scrollRestoration';
 import './style.css';
 
 const html = document.getElementById('html-content')!.textContent!;
 const root = document.getElementById('app')!;
 
-const historyRestoration = createHistoryRestoration();
+const scrollRestoration = createScrollRestoration();
 
-historyRestoration.load(async () => {
+scrollRestoration.load(async () => {
   // 模拟延时加载页面
   console.log('load...');
   await delay(300);

@@ -1,8 +1,8 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Link, service } from '../lib/service';
-import HistoryRestorationDone from './HistoryRestorationDone';
 import LinkList from './LinkList';
 import Loading from './Loading';
+import ScrollRestorationDone from './ScrollRestorationDone';
 
 const AsyncLinkListHOC = createAsyncLinkList(() => service.getLinks());
 
@@ -20,7 +20,7 @@ export default function AsyncLinkList() {
   return (
     <Suspense fallback={<Loading />}>
       <AsyncLinkListHOC />
-      <HistoryRestorationDone />
+      <ScrollRestorationDone />
     </Suspense>
   );
 }

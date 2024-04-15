@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, service } from '../lib/service';
-import HistoryRestorationDone from './HistoryRestorationDone';
 import LinkList from './LinkList';
 import Loading from './Loading';
+import ScrollRestorationDone from './ScrollRestorationDone';
 
 // same as LinkListWithSuspense
 export default function AsyncLinkListUseEffect() {
@@ -26,7 +26,7 @@ export default function AsyncLinkListUseEffect() {
   return (
     <>
       <LinkList links={links} />
-      <HistoryRestorationDone />
+      <ScrollRestorationDone />
     </>
   );
 }
