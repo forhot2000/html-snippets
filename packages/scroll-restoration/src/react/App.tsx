@@ -6,6 +6,8 @@ import PoweredByReact from './PoweredByReact';
 export default function App() {
   return (
     <StrictMode>
+      <AsyncLinkList />
+      <PoweredByReact />
       <LargeBlock />
       <LargeBlock />
       <LargeBlock />
@@ -13,6 +15,8 @@ export default function App() {
       <PoweredByReact />
       <LargeBlock />
       <LargeBlock />
+      <AsyncLinkList />
+      <PoweredByReact />
     </StrictMode>
   );
 }

@@ -1,23 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, service } from '../lib/service';
-import { useHistoryRestoration } from '../lib/useHistoryRestoration';
+import HistoryRestorationDone from './HistoryRestorationDone';
 import LinkList from './LinkList';
 import Loading from './Loading';
 
 // same as LinkListWithSuspense
 export default function AsyncLinkListUseEffect() {
-  const [links, setLinks] = React.useState<Link[]>([]);
-  const [pending, setPending] = React.useState(true);
-  const historyRestoration = useHistoryRestoration();
+  const [links, setLinks] = useState<Link[]>([]);
+  const [pending, setPending] = useState(true);
 
-  React.useEffect(() => {
+  useEffect(() => {
     async function load() {
       const links = await service.getLinks();
       setLinks(links);
     }
     load().finally(() => {
       setPending(false);
-      historyRestoration.done();
     });
   }, []);
 
@@ -25,5 +23,10 @@ export default function AsyncLinkListUseEffect() {
     return <Loading />;
   }
 
-  return <LinkList links={links} />;
+  return (
+    <>
+      <LinkList links={links} />
+      <HistoryRestorationDone />
+    </>
+  );
 }
